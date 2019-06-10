@@ -1,0 +1,8 @@
+span{
+    color: red;
+    font-size: 12px;
+}
+
+.btn .btn-primary:disabled{
+    cursor: no-drop ;
+}

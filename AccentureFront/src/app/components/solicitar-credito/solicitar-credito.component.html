@@ -1,0 +1,46 @@
+<section class="container">
+  <h1>Solitar Credito</h1>
+  <p>Todos los campos son obligatorios*</p>
+  <form [formGroup]="formGroup" (ngSubmit)="submitForm(content)">
+    <div class="form-group">
+      <label for="nombreEmpresas">Nombre de la empresa en la que trabaja actualmente</label>
+      <input type="text" class="form-control" id="nombreEmpresas" formControlName="nombreEmpresa"
+        placeholder="Nombre Empresa">
+      <span *ngIf="(formGroup.controls.nombreEmpresa.touched && formGroup.controls.nombreEmpresa.invalid)">Campo
+        Obligatorio</span>
+    </div>
+    <div class="form-group">
+      <label for="nitEmpresa">Nit Empresa</label>
+      <input type="number" class="form-control" id="nitEmpresa" formControlName="nitEmpresa" placeholder="Nit Empresa">
+      <span *ngIf="(formGroup.controls.nitEmpresa.touched && formGroup.controls.nitEmpresa.invalid)">Campo
+        Obligatorio</span>
+    </div>
+    <div class="form-group">
+      <label for="salarioActual">Salario Actual</label>
+      <input type="number" class="form-control" id="salarioActual" formControlName="salarioActual"
+        placeholder="Salario Actual">
+      <span *ngIf="(formGroup.controls.salarioActual.touched && formGroup.controls.salarioActual.invalid)">Campo
+        Obligatorio</span>
+        <span *ngIf="salaryValid">El salario ingresado no es un valor correcto</span>
+    </div>
+    <div class="form-group">
+      <label for="fechaIngreso">Fecha de ingreso a la empresa</label>
+      <input type="date" class="form-control" id="fechaIngreso" formControlName="fechaIngreso"
+        placeholder="Fecha de Ingreso" max={{date}}>
+      <span *ngIf="(formGroup.controls.fechaIngreso.touched && formGroup.controls.fechaIngreso.invalid)">Campo Obligatorio</span>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="formGroup.status === 'INVALID'">Enviar</button>
+  </form>
+</section>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Credito Aprobado</h4>
+  </div>
+  <div class="modal-body">
+    <p>{{messageCredit}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+  </div>
+</ng-template>

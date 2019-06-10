@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Registra información personal</h2>
+  <form [formGroup]="formGroup" (ngSubmit)="submitForm(content)">
+    <div class="form-group">
+      <label for="numeroCedula">Número de cédula</label>
+      <input type="number" class="form-control" id="numeroCedula" formControlName="numeroCedula"
+        placeholder="Numero de Cedula" (blur)="validateUserinDB()">
+        <span *ngIf="(formGroup.controls.numeroCedula.touched && formGroup.controls.numeroCedula.invalid)">Campo Obligatorio</span>
+        <span *ngIf="messageRegister">Usted ya se encuentra registrado</span>
+    </div>
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Nombre" [attr.disabled]="inputDisabled ? 'disabled': null">
+      <span *ngIf="(formGroup.controls.nombre.touched && formGroup.controls.nombre.invalid)">Campo Obligatorio</span>
+    </div>
+    <div class="form-group">
+      <label for="Apellido">Apellido</label>
+      <input type="text" class="form-control" id="Apellido" placeholder="Apellido" formControlName="apellido" [attr.disabled]="inputDisabled ? 'disabled': null">
+      <span *ngIf="(formGroup.controls.apellido.touched && formGroup.controls.apellido.invalid)">Campo Obligatorio</span>
+    </div>
+    <div class="form-group">
+      <label for="fechaNacimiento">Fecha Nacimiento</label>
+      <input type="date" class="form-control" id="fechaNacimiento" placeholder="fechaNacimiento"
+        formControlName="fechaNacimiento" (change)="validateAge()" max ={{date}} [attr.disabled]="inputDisabled ? 'disabled': null">
+        <span *ngIf="ageOld">Debe ser mayor de 18 años</span>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="(formGroup.status === 'INVALID' || ageOld)">Enviar</button>
+  </form>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">ss
+    </div>
+    <div class="modal-body">
+      <p>{{messageService}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+    </div>
+  </ng-template>

@@ -1,0 +1,23 @@
+<div class="container">
+  <p>Validaremos que usted se encuentre registrado en la Base de datos de clientes del banco</p>
+  <form [formGroup]="formGroup" (ngSubmit)="submitForm(content)">
+      <div class="form-group">
+        <label for="numeroCedula">Número de cédula</label>
+        <input type="number" class="form-control" id="numeroCedula"  placeholder="Numero de cedula" formControlName="numeroCedula">
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <p>Usted no se encuentra registrado en la base de datos de clientes de nuestra entidad. Lo invitamos a registrarse</p>
+    <button type="button" class="btn btn-primary" (click)="modal.close('Save click');goRegister()">
+      Registrarse
+    </button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+  </div>
+</ng-template>
+
