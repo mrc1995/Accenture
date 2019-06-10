@@ -14,6 +14,7 @@ export class SolicitarCreditoComponent implements OnInit {
   valueCredit: number;
   messageCredit :string = '';
   date: any;
+  value: boolean;
 
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private _initDate: initDate) { }
 
@@ -79,5 +80,10 @@ export class SolicitarCreditoComponent implements OnInit {
     this.modalService.open(content);
   }
 
+  valueCorrect(){
+    console.log('Validando');
+    let value = this.formGroup.value.salarioActual;
+    value > 100000000 ? this.value = true : this.value = false;
+  }
   
 }

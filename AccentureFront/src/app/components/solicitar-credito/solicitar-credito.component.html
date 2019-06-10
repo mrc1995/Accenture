@@ -18,10 +18,10 @@
     <div class="form-group">
       <label for="salarioActual">Salario Actual</label>
       <input type="number" class="form-control" id="salarioActual" formControlName="salarioActual"
-        placeholder="Salario Actual">
+        placeholder="Salario Actual" (ngModelChange)="valueCorrect()" maxlength="15">
       <span *ngIf="(formGroup.controls.salarioActual.touched && formGroup.controls.salarioActual.invalid)">Campo
         Obligatorio</span>
-        <span *ngIf="salaryValid">El salario ingresado no es un valor correcto</span>
+        <span *ngIf="value">El salario ingresado no es un valor correcto, supera {{100000000 | currency}}</span>
     </div>
     <div class="form-group">
       <label for="fechaIngreso">Fecha de ingreso a la empresa</label>
