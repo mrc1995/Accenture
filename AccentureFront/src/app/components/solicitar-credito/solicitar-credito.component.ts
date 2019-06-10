@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {initDate} from './../../utils/date';
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-solicitar-credito',
@@ -16,7 +17,12 @@ export class SolicitarCreditoComponent implements OnInit {
   date: any;
   value: boolean;
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private _initDate: initDate) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private modalService: NgbModal, 
+    private _initDate: initDate,
+    private currencyPipe: CurrencyPipe
+  ) { }
 
   ngOnInit() {
     this.buildForm();
@@ -35,7 +41,7 @@ export class SolicitarCreditoComponent implements OnInit {
   submitForm(content){
     this.valueAprobate();
     if(this.validateTimeWorked() && this.valueCredit > 0){
-      this.messageCredit = 'Se aprobo un credito por el valor de '+ this.valueCredit;
+      this.messageCredit = 'Se aprobo un credito por el valor de '+ this.currencyPipe.transform(this.valueCredit, 'USD');
     }else if(!this.validateTimeWorked() && this.valueCredit > 0){
       this.messageCredit = 'Usted no lleva mas de año y medio en la empresa por lo tanto no puede acceder a un credito'
     }else if(this.validateTimeWorked() && this.valueCredit === 0){
@@ -81,9 +87,8 @@ export class SolicitarCreditoComponent implements OnInit {
   }
 
   valueCorrect(){
-    console.log('Validando');
     let value = this.formGroup.value.salarioActual;
     value > 100000000 ? this.value = true : this.value = false;
   }
-  
+
 }
